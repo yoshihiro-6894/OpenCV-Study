@@ -1,3 +1,4 @@
+#フリップさせる(反転)
 import cv2
 
 try:
@@ -8,14 +9,24 @@ try:
         import sys
         sys.exit()
         
+    #flip(src,filecode)
+    #src -> 入力画像(配列)
+    #filecode -> フリップの方向
+        #  0 -> x軸周りでの反転(上下反転)
+        # >0 -> y軸周りでの反転(左右反転)
+        # <0 -> 両軸周りでの反転
+    
+    #上下反転
     dst = cv2.flip(img,0)
     cv2.imwrite("./flip0.jpg",dst)
     cv2.imshow("dst1",dst)
     
+    #左右反転
     dst = cv2.flip(img,1)
     cv2.imwrite("./flip1.jpg",dst)
     cv2.imshow("dst2",dst)
     
+    #両軸反転
     dst = cv2.flip(img,-1)
     cv2.imwrite("./flip2.jpg",dst)
     cv2.imshow("dst3",dst)

@@ -1,3 +1,5 @@
+#リサイズする
+
 import cv2
 
 try:

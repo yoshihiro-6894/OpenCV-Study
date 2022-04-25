@@ -1,3 +1,5 @@
+#画像に線をひく
+
 import cv2
 import sys
 

@@ -1,3 +1,5 @@
+#画像に円を描画する
+
 import cv2
 import sys
 

@@ -1,3 +1,4 @@
+#画像にテキストを描く
 import cv2
 import sys
 

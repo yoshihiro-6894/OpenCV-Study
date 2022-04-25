@@ -1,3 +1,5 @@
+#画像を生成する、円を書く
+
 import cv2
 import numpy as np
 
