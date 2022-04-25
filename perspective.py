@@ -17,6 +17,7 @@ try:
     y0 = rows/4
     y1 = (rows*3)/4
     
+    #[左上],[左下],[右下],[右上]
     list_src = np.float32([[x0, y0], [x0, y1], [x1, y1], [x1, y0]])
     print("list_src")
     print(list_src)
@@ -69,7 +70,6 @@ try:
     cv2.imwrite("./dest2.jpg",dst)
     cv2.imshow("dst2",dst)
     
-        
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 except:
