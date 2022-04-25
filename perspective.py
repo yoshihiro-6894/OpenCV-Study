@@ -18,14 +18,56 @@ try:
     y1 = (rows*3)/4
     
     list_src = np.float32([[x0, y0], [x0, y1], [x1, y1], [x1, y0]])
+    print("list_src")
     print(list_src)
     
     #pattern-0
+    print("pattern-0")
     x_margin = cols/10
     y_margin = rows/10
     list_dsts = np.float32([[x0+x_margin,y0+y_margin],list_src[1],list_src[2],
-                           [x1-x_margin,y0_margin]])
+                           [x1-x_margin,y0+y_margin]])
+    print("list_dsts")
+    print(list_dsts)
     
+    perspective_matrix = cv2.getPerspectiveTransform(list_src,list_dsts)
+    dst = cv2.warpPerspective(img, perspective_matrix, (cols,rows))
+    
+    cv2.imwrite("./dest0.jpg",dst)
+    cv2.imshow("dst0",dst)
+    
+    
+    #pattern-1
+    print("pattern-1")
+    x_margin = cols/8
+    y_margin = rows/8
+    list_dsts = np.float32([list_src[0],list_src[1],
+                           [x1-x_margin, y1-y_margin],
+                           [x1-x_margin, y0+y_margin]])
+    print("list_dsts")
+    print(list_dsts)
+    
+    perspective_matrix = cv2.getPerspectiveTransform(list_src,list_dsts)
+    dst = cv2.warpPerspective(img, perspective_matrix, (cols,rows))
+    
+    cv2.imwrite("./dest1.jpg",dst)
+    cv2.imshow("dst1",dst)
+    
+    #pattern-2
+    print("pattern-2")
+    x_margin = cols/6
+    y_margin = rows/6
+    list_dsts = np.float32([[x0+x_margin, y0+y_margin],list_src[1],
+                           [x1-x_margin, y1-y_margin],list_src[3]])
+    
+    print("list_dsts")
+    print(list_dsts)
+    
+    perspective_matrix = cv2.getPerspectiveTransform(list_src,list_dsts)
+    dst = cv2.warpPerspective(img, perspective_matrix, (cols,rows))
+    
+    cv2.imwrite("./dest2.jpg",dst)
+    cv2.imshow("dst2",dst)
     
         
     cv2.waitKey(0)
