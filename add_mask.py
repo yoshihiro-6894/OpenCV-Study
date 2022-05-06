@@ -17,7 +17,7 @@ try:
     cv2.imshow("img2",img2)
     
     height = img1.shape[0]
-    width = img2.shape[1]
+    width = img1.shape[1]
     
     img_mask = np.zeros((height, width), np.uint8)
     img_mask[height//4:height*3//4, width//4:width*3//4] = [255]
