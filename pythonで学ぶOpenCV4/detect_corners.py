@@ -25,7 +25,7 @@ try:
     
     for i in corners:
         x,y = i.ravel()
-        
+        print(i)
         x = x.astype(int)
         y = y.astype(int)
         cv2.circle(img, (x,y), 4, (255,255,0), 2)
