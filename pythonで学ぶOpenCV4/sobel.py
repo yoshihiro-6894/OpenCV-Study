@@ -5,6 +5,7 @@ import cv2
 try:
     #img = cv2.imread("./Images/Lenna.bmp")
     img = cv2.imread("./Images/Lenna.bmp",cv2.IMREAD_GRAYSCALE)
+    #img = cv2.imread("./D-Textureless/train/model_03.png")
     
     if img is None:
         print("ファイルを読み込めません")

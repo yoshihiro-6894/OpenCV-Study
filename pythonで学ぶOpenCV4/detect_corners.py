@@ -10,6 +10,7 @@ try:
     MIN_DISTANCE = 20.0
     
     img = cv2.imread("./Images/Lenna.bmp")
+    img = cv2.imread("./D-Textureless/train/model_03.png")
     
     if img is None:
         print("ファイルを読み込めません")
@@ -19,7 +20,7 @@ try:
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
     corners = cv2.goodFeaturesToTrack(gray, MAX_CORNERS, QUALITY_LEVEL,
                                       MIN_DISTANCE, blockSize = BLOCK_SIZE,
-                                      useHarrisDetector = False)
+                                      useHarrisDetector = True)
     
     print(corners)
     
@@ -30,7 +31,7 @@ try:
         y = y.astype(int)
         cv2.circle(img, (x,y), 4, (255,255,0), 2)
         
-    cv2.imwrite("corners.jpg",img)
+    cv2.imwrite("corners_textureless.jpg",img)
     cv2.imshow("img",img)
     
     cv2.waitKey(0)
