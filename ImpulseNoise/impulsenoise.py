@@ -5,7 +5,7 @@ https://qiita.com/bohemian916/items/9630661cd5292240f8c7
 import cv2
 import numpy as np
 
-img = cv2.imread("./Images/Lenna.bmp",1)
+img = cv2.imread("./Images/Girl.bmp",1)
 row,col,ch = img.shape
 
 print(row,col,ch)
