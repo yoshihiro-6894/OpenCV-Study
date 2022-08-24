@@ -8,12 +8,12 @@ import matplotlib.pyplot as plt
 
 OrijinalImage = cv2.imread("../Images/Girl.bmp",0)
 inputImage = cv2.imread("../noise.jpg",0)
-#inputImage = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8,9,10,11],[12,13,14,15]])
-cv2.imshow("imput",inputImage)
-cv2.imwrite("input.jpg",inputImage)
+inputImage = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8,9,10,11],[12,13,14,15]])
+#cv2.imshow("imput",inputImage)
+#cv2.imwrite("input.jpg",inputImage)
 print(inputImage.shape)
 
-def median_filter(image, kernel, boundary='edge'):
+def median_filter(image, kernel, boundary='reflect'):
   pad_image = np.pad(image, ((int(kernel[0] / 2),), (int(kernel[1] / 2),)), boundary)
   print(pad_image)
   print("---------------")
@@ -32,6 +32,7 @@ median_image = median_filter(inputImage,kernel=(5,5))
 median_image = median_image.astype(np.uint8)
 print(median_image)
 
+'''
 cv2.imshow("dst",median_image)
 cv2.imwrite("median_output11_11.jpg",median_image)
 
@@ -40,3 +41,4 @@ print(cv2.PSNR(OrijinalImage,median_image))
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+'''
