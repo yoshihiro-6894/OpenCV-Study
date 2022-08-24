@@ -2,7 +2,7 @@
 import cv2
 
 try:
-    img = cv2.imread('./Images/Lenna.bmp')
+    img = cv2.imread('./Images/Lenna.bmp',0)
     
     if img is None:
         print("ファイルを読み込めません")
