@@ -3,6 +3,7 @@ import cv2
 import math
 
 import GlobalValue as g
+import hyouka
 
 def pad_stride(image,kernel,boundary):
   pad_image = np.pad(image, ((int(kernel.shape[0] / 2),), (int(kernel.shape[1] / 2),)), boundary)
@@ -40,6 +41,7 @@ def W_median(image,kernel):
   for i in range(len(image)):
     for j in range(int(kernel[i])):
       a = np.append(a,image[i])
+  #print(a)
   return np.median(a)
 
 def median_filter(image, boundary='reflect'):
@@ -51,11 +53,12 @@ def median_filter(image, boundary='reflect'):
     kernel_3_1=kernel_3.reshape(9,)
     kernel_5=np.array([[1,2,3,2,1],[2,4,5,4,2],[3,5,0,5,3],[2,4,5,4,2],[1,2,3,2,1]])
     kernel_5_1=kernel_5.reshape(kernel_5.shape[0]*kernel_5.shape[1])
-    print(kernel_5)
-    print(kernel_5_1)
+    kernel_7=np.array([[1,2,3,4,3,2,1],[2,4,5,6,5,4,2],[3,5,7,8,7,5,3],[4,6,8,0,8,6,4],[3,5,7,8,7,5,3],[2,4,5,6,5,4,2],[1,2,3,4,3,2,1]])
+    kernel_7_1=kernel_7.reshape(kernel_7.shape[0]*kernel_7.shape[1])
     kernel_11=np.zeros((11,11))
     strided_image_3 = pad_stride(image,kernel_3,boundary)
     strided_image_5 = pad_stride(image,kernel_5,boundary)
+    strided_image_7 = pad_stride(image,kernel_7,boundary)
     strided_image_11 = pad_stride(image,kernel_11,boundary)
 
     '''
@@ -87,27 +90,27 @@ def median_filter(image, boundary='reflect'):
           #img_cp[i][j] = W(strided_image_11[i][j])
 
     binary_3 = pad_stride(img_binary,kernel_3,boundary)
-    print(binary_3.shape)
     binary_5 = pad_stride(img_binary,kernel_5,boundary)
+    binary_7 = pad_stride(img_binary,kernel_7,boundary)
     binary_11 = pad_stride(img_binary,kernel_11,boundary)
 
     
+
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if img_binary[j][i] == 1:
           if np.count_nonzero(binary_3[j][i]==1) < 4:
             #3*3
             #print(binary_3[j][i])
-            img_cp[j][i] = W_median(strided_image_3[j][i], (kernel_3_1*binary_3[j][i])) 
+            img_cp[j][i] = W_median(strided_image_3[j][i], (kernel_3_1*(np.ones(binary_3[j][i].shape)-binary_3[j][i]))) 
           elif np.count_nonzero(binary_5[j][i]==1) < 13:
             #5*5
             #print(binary_5[j][i])
-            img_cp[j][i] = W_median(strided_image_5[j][i], (kernel_5_1*binary_5[j][i]))
+            img_cp[j][i] = W_median(strided_image_5[j][i], (kernel_5_1*(np.ones(binary_5[j][i].shape)-binary_5[j][i])))
           else:
-            img_cp[j][i] = median(strided_image_11[j][i])
+            img_cp[j][i] = W_median(strided_image_7[j][i], (kernel_7_1*(np.ones(binary_7[j][i].shape)-binary_7[j][i])))
 
-    
-    
+    hyouka.hyou(g.TruenoiseBinary,img_binary)
 
     return img_cp
 
