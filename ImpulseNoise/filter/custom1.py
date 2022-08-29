@@ -41,11 +41,12 @@ def W_median(image,kernel):
   for i in range(len(image)):
     for j in range(int(kernel[i])):
       a = np.append(a,image[i])
-  #print(a)
+  if a.shape[0]<1:
+    return image[math.floor(image.shape[0]/2)]
   return np.median(a)
 
 def median_filter(image, boundary='reflect'):
-    img_binary=np.zeros(image.shape)
+    img_binary=np.zeros(image.shape,dtype=np.uint8)
     img_cp = image.copy()
     print("custom1")
 
@@ -83,6 +84,7 @@ def median_filter(image, boundary='reflect'):
 
     print(strided_image_11.shape)
 
+    print("ノイズ検出")
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if (strided_image_3[i][j][4]==0) or (strided_image_3[i][j][4]==255):
@@ -94,26 +96,22 @@ def median_filter(image, boundary='reflect'):
     binary_7 = pad_stride(img_binary,kernel_7,boundary)
     binary_11 = pad_stride(img_binary,kernel_11,boundary)
 
-    
-
+    print("ノイズ除去")
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
-        if img_binary[j][i] == 1:
-          if np.count_nonzero(binary_3[j][i]==1) < 4:
+        if img_binary[i][j] == 1:
+          if np.count_nonzero(binary_3[i][j]==1) < 4:
             #3*3
-            #print(binary_3[j][i])
-            img_cp[j][i] = W_median(strided_image_3[j][i], (kernel_3_1*(np.ones(binary_3[j][i].shape)-binary_3[j][i]))) 
-          elif np.count_nonzero(binary_5[j][i]==1) < 13:
+            img_cp[i][j] = W_median(strided_image_3[i][j], (kernel_3_1*(np.ones(binary_3[i][j].shape)-binary_3[i][j]))) 
+          elif np.count_nonzero(binary_5[i][j]==1) < 13:
             #5*5
-            #print(binary_5[j][i])
-            img_cp[j][i] = W_median(strided_image_5[j][i], (kernel_5_1*(np.ones(binary_5[j][i].shape)-binary_5[j][i])))
+            img_cp[i][j] = W_median(strided_image_5[i][j], (kernel_5_1*(np.ones(binary_5[i][j].shape)-binary_5[i][j])))
           else:
-            img_cp[j][i] = W_median(strided_image_7[j][i], (kernel_7_1*(np.ones(binary_7[j][i].shape)-binary_7[j][i])))
+            img_cp[i][j] = W_median(strided_image_7[i][j], (kernel_7_1*(np.ones(binary_7[i][j].shape)-binary_7[i][j])))
 
     hyouka.hyou(g.TruenoiseBinary,img_binary)
 
     return img_cp
-
 
     return np.apply_along_axis(lambda a: W(a),2,strided_image_11)
 
