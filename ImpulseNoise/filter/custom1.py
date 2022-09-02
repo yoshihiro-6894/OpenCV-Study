@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import math
+import time
 
 import GlobalValue as g
 import hyouka
@@ -85,11 +86,15 @@ def median_filter(image, boundary='reflect'):
     print(strided_image_11.shape)
 
     print("ノイズ検出")
+    t=time.time()
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if (strided_image_3[i][j][4]==0) or (strided_image_3[i][j][4]==255):
           img_binary[i][j]=W(strided_image_11[i][j])
           #img_cp[i][j] = W(strided_image_11[i][j])
+    tt=time.time()
+    print("時間")
+    print(tt-t)
 
     binary_3 = pad_stride(img_binary,kernel_3,boundary)
     binary_5 = pad_stride(img_binary,kernel_5,boundary)
@@ -97,6 +102,7 @@ def median_filter(image, boundary='reflect'):
     binary_11 = pad_stride(img_binary,kernel_11,boundary)
 
     print("ノイズ除去")
+    t=time.time()
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if img_binary[i][j] == 1:
@@ -108,7 +114,9 @@ def median_filter(image, boundary='reflect'):
             img_cp[i][j] = W_median(strided_image_5[i][j], (kernel_5_1*(np.ones(binary_5[i][j].shape)-binary_5[i][j])))
           else:
             img_cp[i][j] = W_median(strided_image_7[i][j], (kernel_7_1*(np.ones(binary_7[i][j].shape)-binary_7[i][j])))
-
+    tt=time.time()
+    print("時間")
+    print(tt-t)
     hyouka.hyou(g.TruenoiseBinary,img_binary)
 
     return img_cp
