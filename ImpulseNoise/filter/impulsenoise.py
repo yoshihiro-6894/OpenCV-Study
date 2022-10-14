@@ -9,36 +9,50 @@ import numpy as np
 
 def addNoise(img, amount):
   row,col = img.shape
-  No_amount = 0.02 * amount
+  No_amount = 0.01 * amount
   sp_img = img.copy()
   binary_noise = np.zeros(sp_img.shape)
   count=0
 
-  num_salt = np.ceil(No_amount * img.size)
+  num_salt = np.ceil(5 * No_amount * img.size)
   print(int(num_salt))
-  print(No_amount/2 * img.size)
-  coords = [np.random.randint(0, i-1 , int(num_salt)) for i in img.shape]
-  coord= np.array(coords)
-  #print(coord.shape)
-  for i in range(coord.shape[1]):
+  mokuhyou = int(np.ceil(No_amount * img.size))
+  print("目標ノイズ個数"+str(np.ceil(No_amount * img.size)))
+  #print(mokuhyou)
+  coordsy = [np.random.randint(0, row , int(num_salt))]
+  coordsx = [np.random.randint(0, col , int(num_salt)) ]
+  coordy = np.array(coordsy)
+  coordx = np.array(coordsx)
+
+  '''
+  coords = np.stack(coordx,coordy,0)
+  print(corrds.shape[0])
+  '''
+
+  for i in range(coordx.shape[1]):
+    if binary_noise[coordy[0][i]][coordx[0][i]]==0:
       if(i%2==0):
-          sp_img[coord[1][i]][coord[0][i]]=255
+          sp_img[coordy[0][i]][coordx[0][i]]=np.random.randint(128,256)
       else:
-          sp_img[coord[1][i]][coord[0][i]]=0
-      binary_noise[coord[1][i]][coord[0][i]]=255
+          sp_img[coordy[0][i]][coordx[0][i]]=np.random.randint(0,128)
+      binary_noise[coordy[0][i]][coordx[0][i]]=255
+      count=count+1
+    
+    if count>=mokuhyou:
+      print("owari")
+      break
       
+  count=0
   for i in range(sp_img.shape[1]):
     for j in range(sp_img.shape[0]):
       if (binary_noise[j][i]==255):
         count = count+1
-  print(count)
-  print("\n\n")
+  print("付与したノイズ個数:"+str(count)+"\n")
   cv2.imwrite("noiseBinary"+str(int(amount))+"%.png",binary_noise)
   return sp_img
 
-
-
-os.chdir("testDir")
+#os.chdir("randomNoise/BSD68")
+os.chdir("randomNoise/Set12")
 
 str_imgs=glob.glob('*.png')
 
@@ -50,12 +64,13 @@ for i in range(len(str_imgs)):
     os.mkdir(dirTex)
     print("作成:"+dirTex)
   os.chdir(dirTex)
-
+  cv2.imwrite("orijinal.png",input_img)
+  print(input_img.shape)
   for j in range(9):
     noise=addNoise(input_img,(j+1)*10)
     cv2.imwrite("Noise"+str((j+1)*10)+"%.png",noise)
   os.chdir("..")
-  
+  print("\n")
 
 
 '''
