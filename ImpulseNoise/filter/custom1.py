@@ -13,6 +13,12 @@ def pad_stride(image,kernel,boundary):
   # as_strided()でpad_imageをshapeの大きさの配列をスライドしたような配列を生成する
   return np.lib.stride_tricks.as_strided(pad_image, shape, strides).reshape(shape[0], shape[1], kernel.shape[0] * kernel.shape[1])
 
+def detect(image):
+  forcus = image[4]
+  if((forcus==np.min(image))or(forcus==np.max(image))):
+    return True
+  else:
+    return False
 
 def W(image):
   sort_R = np.sort(image)
@@ -89,12 +95,14 @@ def median_filter(image, boundary='reflect'):
     t=time.time()
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
-        if (strided_image_3[i][j][4]==0) or (strided_image_3[i][j][4]==255):
-          img_binary[i][j]=W(strided_image_11[i][j])
+        #if detect(strided_image_3[i][j]==True):
+        img_binary[i][j]=W(strided_image_11[i][j])
           #img_cp[i][j] = W(strided_image_11[i][j])
     tt=time.time()
     print("時間")
     print(tt-t)
+
+    
 
     binary_3 = pad_stride(img_binary,kernel_3,boundary)
     binary_5 = pad_stride(img_binary,kernel_5,boundary)
