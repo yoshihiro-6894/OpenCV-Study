@@ -1,4 +1,5 @@
 '''
+論文
 Random-valued impulse noise removal using adaptive dual threshold
 median filter
 
@@ -45,6 +46,8 @@ def median_filter(image,size,boundary="reflect"):
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         img_binary[i][j] = rowcol(strided_image[i][j])
+        if img_binary[i][j] == 1:
+          img_cp[i][j] = np.median(strided_image[i][j])
 
     binary_stride = pad_stride(img_binary,kernel,boundary)
 
@@ -54,12 +57,14 @@ def median_filter(image,size,boundary="reflect"):
     binary_7 = pad_stride(img_binary,kernel_7,boundary)
     '''
 
+    '''
+    #ノイズ検出で一通りラスタスキャンした後処理をする場合はこちらを使う
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if img_binary[i][j]==1:
-            img_cp[i][j]=np.median(strided_image[i][j])
+            #img_cp[i][j]=np.median(strided_image[i][j])
             #img_cp[i][j] = W_median(strided_image[i][j], kernel = (kernel*(np.ones(binary_stride[i][j].shape)-binary_stride[i][j])))
-
+    '''
     hyouka.hyou(g.TruenoiseBinary,img_binary)
 
     return img_cp
@@ -68,7 +73,7 @@ def rowcol(image):
     forcus = image[int(image.shape[0] / 2)][int(image.shape[1] / 2)]
     Average_rows = np.mean(image,axis=0)
     Average_cols = np.mean(image,axis=1)
-    concatenate = np.concatenate([Average_rows,Average_cols])
+    concatenate = np.concatenate([np.round(Average_rows).astype(np.uint8), np.round(Average_cols).astype(np.uint8)])
     Th_max = np.max(concatenate)
     Th_min = np.min(concatenate)
     if (forcus<Th_min) or (Th_max<forcus):
