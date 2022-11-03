@@ -24,25 +24,6 @@ import custom_random1
 import Loop_random1
 import custom_random_rowcol
 
-def addNoise(img):
-  row,col = img.shape
-  amount=int(input("ノイズの割合を入力(%):"))
-  amount = 0.01 * amount
-  sp_img = img.copy()
-
-  num_salt = np.ceil(amount * img.size)
-  print(num_salt)
-  coords = [np.random.randint(0, i-1 , int(num_salt)) for i in img.shape]
-  coord= np.array(coords)
-  print(coord.shape)
-  for i in range(coord.shape[1]):
-      if(i%2==0):
-          sp_img[coord[1][i]][coord[0][i]]=255
-      else:
-          sp_img[coord[1][i]][coord[0][i]]=0
-
-  return sp_img
-
 
 def W(image):
   global count
@@ -67,18 +48,6 @@ def W(image):
   return np.median(sort_R)
 
 
-def W_median(image):
-  a = np.empty(0)
-  for i in range(len(image)):
-    #print("image"+str(i)+":"+str(image[i]))
-    #print(as_strided_W_kernel[i])
-    for j in range(as_strided_W_kernel[i]):
-      #print("!")
-      a = np.append(a,image[i])
-    #print("========")
-  return np.median(a)
-
-
 def median_filter(image, kernel, boundary='reflect'):
   pad_image = np.pad(image, ((int(kernel.shape[0] / 2),), (int(kernel.shape[1] / 2),)), boundary)
   shape = (pad_image.shape[0] - kernel.shape[0] + 1, pad_image.shape[1] - kernel.shape[1] + 1) + kernel.shape
@@ -92,7 +61,7 @@ def median_filter(image, kernel, boundary='reflect'):
   return np.apply_along_axis(lambda a: np.median(a), 2, strided_image)
 
 g.count=0
-firsttext="09"
+firsttext="01"
 dirtext="./randomNoise/Set12/"
 NoiseRatio="60"
 
@@ -124,9 +93,11 @@ print("PSNR:"+str(cv2.PSNR(OrijinalImage, median_image)))
 cv2.imshow("dst1",median_image)
 cv2.imwrite("median_output.png",median_image)
 
+'''
 median_image = cv2.medianBlur(inputImage,3)
 print("PSNR:"+str(cv2.PSNR(OrijinalImage, median_image)))
 cv2.imshow("median",median_image)
+'''
 
 ''' simple検出
 median_image = Mo_simple.median_filter(inputImage,kernel=np.zeros([11,11]))
@@ -138,14 +109,14 @@ print("count="+str(g.count))
 g.count=0
 '''
 
-'''
-#custom1
+
+#custom1_rondom1
 median_image = custom_random1.median_filter(inputImage)
 median_image = median_image.astype(np.uint8)
 print("PSNR:"+str(cv2.PSNR(OrijinalImage,median_image)))
 cv2.imshow("dst3",median_image)
 cv2.imwrite("custom1_median_output"+NoiseRatio+".png",median_image)
-'''
+
 
 median_image = custom_random_rowcol.median_filter(inputImage,size=5)
 median_image = median_image.astype(np.uint8)
