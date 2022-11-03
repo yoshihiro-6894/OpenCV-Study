@@ -44,10 +44,17 @@ def W(image):
   return np.median(sort_R)
 
 def W_median(image,kernel):
+  #numpy配列を生成し、リストに変更
   a = np.empty(0)
+  a_list = a.tolist()
+  
   for i in range(len(image)):
     for j in range(int(kernel[i])):
-      a = np.append(a,image[i])
+      #a = np.append(a,image[i])
+      a_list.append(image[i])
+  #numpy配列に戻す
+  a = np.asarray(a_list)
+  
   if a.shape[0]<1:
     return image[math.floor(image.shape[0]/2)]
   return np.median(a)
