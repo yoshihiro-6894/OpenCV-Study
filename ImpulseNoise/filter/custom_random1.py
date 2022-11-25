@@ -79,13 +79,13 @@ def median_filter(image, boundary='reflect'):
     print(strided_image_11.shape)
 
     print("ノイズ検出")
-    t=time.time()
+    t = time.time()
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         #if detect(strided_image_3[i][j]==True):
         img_binary[i][j]=W(strided_image_11[i][j])
           #img_cp[i][j] = W(strided_image_11[i][j])
-    tt=time.time()
+    tt = time.time()
     print("時間")
     print(tt-t)
 
@@ -97,7 +97,7 @@ def median_filter(image, boundary='reflect'):
     binary_11 = pad_stride(img_binary,kernel_11,boundary)
 
     print("ノイズ除去")
-    t=time.time()
+    t = time.time()
     for i in range((image.shape[0])):
       for j in range((image.shape[1])):
         if img_binary[i][j] == 1:
@@ -109,10 +109,11 @@ def median_filter(image, boundary='reflect'):
             img_cp[i][j] = W_median(strided_image_5[i][j],kernel_5_1)
           else:
             img_cp[i][j] = W_median(strided_image_7[i][j],kernel_7_1)
-    tt=time.time()
+    tt = time.time()
     print("時間")
     print(tt-t)
     hyouka.hyou(g.TruenoiseBinary,img_binary)
+    g.img_binary = img_binary.copy()
 
     return img_cp
 

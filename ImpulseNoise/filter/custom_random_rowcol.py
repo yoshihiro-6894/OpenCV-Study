@@ -13,6 +13,7 @@ import time
 
 import GlobalValue as g
 import hyouka
+import visual_hyouka
 
 def pad_stride(image,kernel,boundary):
   pad_image = np.pad(image, ((int(kernel.shape[0] / 2),), (int(kernel.shape[1] / 2),)), boundary)
@@ -29,6 +30,7 @@ def median_filter(image,size,boundary="reflect"):
     kernel = np.ones((size,size))
 
     strided_image = pad_stride(image,kernel,boundary)
+    print(strided_image.shape)
 
     '''
     kernel_3=np.ones((3,3))
@@ -66,6 +68,7 @@ def median_filter(image,size,boundary="reflect"):
             #img_cp[i][j] = W_median(strided_image[i][j], kernel = (kernel*(np.ones(binary_stride[i][j].shape)-binary_stride[i][j])))
     '''
     hyouka.hyou(g.TruenoiseBinary,img_binary)
+    g.img_binary = img_binary.copy()
 
     return img_cp
 

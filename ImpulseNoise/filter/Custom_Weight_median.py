@@ -23,6 +23,8 @@ import custom_next
 import custom_random1
 import Loop_random1
 import custom_random_rowcol
+import custom_tripleThreshold
+import visual_hyouka
 
 
 def W(image):
@@ -63,7 +65,7 @@ def median_filter(image, kernel, boundary='reflect'):
 g.count=0
 firsttext="01"
 dirtext="./randomNoise/Set12/"
-NoiseRatio="60"
+NoiseRatio="40"
 
 #OrijinalImage = cv2.imread("../Images/Set12/"+firsttext+".png",0)
 OrijinalImage = cv2.imread(dirtext+firsttext+"n/orijinal.png",0)
@@ -71,6 +73,7 @@ OrijinalImage = cv2.imread(dirtext+firsttext+"n/orijinal.png",0)
 
 inputImage = cv2.imread(dirtext+firsttext+"n/Noise"+NoiseRatio+"%.png",0)
 g.TruenoiseBinary = cv2.imread(dirtext+firsttext+"n/noiseBinary"+NoiseRatio+"%.png",0)
+g.img_binary = g.TruenoiseBinary.copy()
 #inputImage = np.array([[0, 1, 2, 3], [4, 5, 6, 7], [8,9,10,11],[12,13,14,15]])
 W_kernel = np.array([[1,1,1],[1,1,1],[1,1,1]])
 as_strided_W_kernel = np.lib.stride_tricks.as_strided(W_kernel, shape=(W_kernel.shape[0] * W_kernel.shape[1],))
@@ -110,19 +113,28 @@ g.count=0
 '''
 
 
-#custom1_rondom1
+#custom1_random1
 median_image = custom_random1.median_filter(inputImage)
 median_image = median_image.astype(np.uint8)
 print("PSNR:"+str(cv2.PSNR(OrijinalImage,median_image)))
 cv2.imshow("dst3",median_image)
 cv2.imwrite("custom1_median_output"+NoiseRatio+".png",median_image)
+visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=NoiseRatio,methodName="custom1")
 
+'''
+print("\nLoop\n")
+Loop_random1.loop_custom(inputImage)
+'''
 
 median_image = custom_random_rowcol.median_filter(inputImage,size=5)
 median_image = median_image.astype(np.uint8)
 print("PSNR:"+str(cv2.PSNR(OrijinalImage,median_image)))
 cv2.imshow("dst_rowcol",median_image)
 cv2.imwrite("custom_random_rowcol"+NoiseRatio+".png",median_image)
+visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=NoiseRatio,methodName="rowcol")
+
+
+#custom_tripleThreshold.filter(inputImage)
 
 '''絶対消すな
 g.count=0

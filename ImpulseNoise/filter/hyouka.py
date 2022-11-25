@@ -9,13 +9,13 @@ def hyou(trueNoise, testNoise):
     TN=0
     for i in range(trueNoise.shape[0]):
         for j in range(trueNoise.shape[1]):
-            if trueNoise[j][i]>0:
-                if testNoise[j][i]>0:
+            if trueNoise[i][j]>0:
+                if testNoise[i][j]>0:
                     TP=TP+1
                 else:
                     FN=FN+1
             else:
-                if testNoise[j][i]>0:
+                if testNoise[i][j]>0:
                     FP=FP+1
                 else:
                     TN=TN+1

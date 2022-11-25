@@ -31,10 +31,13 @@ def addNoise(img, amount):
 
   for i in range(coordx.shape[1]):
     if binary_noise[coordy[0][i]][coordx[0][i]]==0:
+      sp_img[coordy[0][i]][coordx[0][i]]=np.random.randint(0,256)
+      '''
       if(i%2==0):
           sp_img[coordy[0][i]][coordx[0][i]]=np.random.randint(128,256)
       else:
           sp_img[coordy[0][i]][coordx[0][i]]=np.random.randint(0,128)
+      '''
       binary_noise[coordy[0][i]][coordx[0][i]]=255
       count=count+1
     
