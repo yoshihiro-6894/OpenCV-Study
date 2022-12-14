@@ -3,6 +3,7 @@ import numpy as np
 import GlobalValue as g
 
 def hyou(trueNoise, testNoise):
+    print("hyouka")
     TP=0
     FN=0
     FP=0
@@ -21,20 +22,17 @@ def hyou(trueNoise, testNoise):
                     TN=TN+1
 
 
-    print("TP"+str(TP))
-    print("FN"+str(FN))
-    print("FP"+str(FP))
-    print("TN"+str(TN))
+    print("TP"+str(TP)+" "+"FN"+str(FN)+ " "+"FP"+str(FP)+" "+"TN"+str(TN))
 
     if TP ==0:
         print("TPが0のため略")
         return
 
     Precision=TP/(TP+FP)
-    print("適合率:"+str(Precision))
-
     recall=TP/(TP+FN)
-    print("再現率:"+str(recall))
+    print("適合率:"+str(Precision)+"再現率:"+str(recall))
 
     F=(2*Precision*recall)/(Precision+recall)
     print("F値:"+str(F))
+
+    return str(format(F, '.3f'))

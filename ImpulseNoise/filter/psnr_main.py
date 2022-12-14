@@ -27,6 +27,11 @@ for i in range(6):
         inputImage = cv2.imread("Noise"+str(NoiseRatio)+"%.png",0)
         PSNRs = np.empty(0)
 
+        perfect = cv2.imread("perfect" + str(NoiseRatio) + ".png",0)
+        print(cv2.PSNR(OrijinalImage,perfect))
+
+
+        '''
         median_image = cv2.imread("custom1_median_output"+str(NoiseRatio)+".png",0)
         print(cv2.PSNR(OrijinalImage,median_image))
         a = cv2.PSNR(OrijinalImage,median_image)
@@ -51,6 +56,7 @@ for i in range(6):
         print(cv2.PSNR(OrijinalImage,median_image))
         a = cv2.PSNR(OrijinalImage,median_image)
         PSNRs = np.append(PSNRs,a)
+        '''
 
 
         os.chdir("../")

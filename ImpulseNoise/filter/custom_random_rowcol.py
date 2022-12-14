@@ -93,3 +93,25 @@ def W_median(image,kernel):
   if a.shape[0]<1:
     return image[math.floor(image.shape[0]/2)]
   return np.median(a)
+
+def try_filter(image,size,boundary="reflect"):
+    img_binary = np.zeros(image.shape,dtype=np.uint8)
+    print("custom_random_rowcol_try")
+
+    kernel = np.ones((size,size))
+    strided_image = pad_stride(image,kernel,boundary)
+
+    for i in range((image.shape[0])):
+      for j in range((image.shape[1])):
+        
+        img_binary[i][j] = rowcol(strided_image[i][j])
+        if img_binary[i][j] == 1:
+          image[i][j] = np.median(strided_image[i][j])
+          strided_image = pad_stride(image,kernel,boundary)
+
+    binary_stride = pad_stride(img_binary,kernel,boundary)
+
+    hyouka.hyou(g.TruenoiseBinary,img_binary)
+    g.img_binary = img_binary.copy()
+
+    return image

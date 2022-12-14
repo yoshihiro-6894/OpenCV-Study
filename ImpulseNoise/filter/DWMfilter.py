@@ -26,26 +26,34 @@ def detect(input,size):
     print(Direct_coordinates.shape)
     Direct_coordinates_list = Direct_coordinates.tolist()
     for i in range(size):
+        if i == int(size/2):
+            continue
         #print(i,i)
         #print(int(size/2),i)
         print(size-i-1,i)
         #print(i,int(size/2))
-
+        '''
         Direct_coordinates_list[0].append(input[i,i])
         Direct_coordinates_list[1].append(input[int(size/2),i])
         Direct_coordinates_list[2].append(input[size-1-i,i])
         Direct_coordinates_list[3].append(input[i,int(size/2)])
+        '''
+        Direct_coordinates_list[0].append(input[i*size+i])
+        Direct_coordinates_list[1].append(input[int(size/2)*size + i])
+        Direct_coordinates_list[2].append(input[(size-1-i)*size + i])
+        Direct_coordinates_list[3].append(input[i*size + int(size/2)])
     Direct_coordinates = np.asarray(Direct_coordinates_list)
         
     print(Direct_coordinates)
     print(Direct_coordinates.shape)
 
-    centers = np.tile(input[int(size/2),int(size/2)],(Direct_coordinates.shape))
+    centers = np.tile(input[int(size/2)*size+int(size/2)],(Direct_coordinates.shape))
     print(centers)
 
     print(np.abs(Direct_coordinates - centers))
     print(np.sum((np.abs(Direct_coordinates - centers)),axis=1))
     print(np.min(np.sum((np.abs(Direct_coordinates - centers)),axis=1)))
+    print(np.argmin(np.sum((np.abs(Direct_coordinates-centers)),axis=1)))
 
 
 asize=5
@@ -56,7 +64,7 @@ for i in range(asize):
     for j in range(asize):
         b[i,j] = i*asize + j
 
-c = padding.pad_stride(b,np.zeros((asize,asize)))
+c = padding.pad_stride_reshape(b,np.zeros((asize,asize)))
 detect(c[1,2],asize)
 
 

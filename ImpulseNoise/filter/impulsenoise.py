@@ -61,13 +61,14 @@ str_imgs=glob.glob('*.png')
 
 for i in range(len(str_imgs)):
   print(str_imgs[i]+"を読み込みました")
-  input_img=cv2.imread(str_imgs[i],0)
   dirTex="0"+str(i+1)+"n"
   if os.path.exists(dirTex) != True:
     os.mkdir(dirTex)
     print("作成:"+dirTex)
   os.chdir(dirTex)
-  cv2.imwrite("orijinal.png",input_img)
+  #cv2.imwrite("orijinal.png",input_img)
+  
+  input_img=cv2.imread("orijinal.png",0)
   print(input_img.shape)
   for j in range(9):
     noise=addNoise(input_img,(j+1)*10)
