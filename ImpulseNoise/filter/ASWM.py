@@ -69,7 +69,6 @@ def ASWMfilter(image,alpha=20,delta=0.1,epsilon=0.01,windowSize=3):
                 img_cp[x,y] = np.median(pad_image[x,y])
 
     g.img_binary = img_binary.copy()
-    hyouka.hyou(g.TruenoiseBinary,img_binary)
     return img_cp
 
             

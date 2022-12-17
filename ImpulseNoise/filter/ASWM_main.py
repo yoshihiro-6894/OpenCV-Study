@@ -10,6 +10,7 @@ import GlobalValue as g
 
 import ASWM
 import visual_hyouka
+import hyouka
 
 firsttext = "01"
 dirtext = "./randomNoise/Set12/"
@@ -47,6 +48,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_1+times"+".png",median_image)
+        g.baseBinary = g.img_binary.copy()
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_1")
         
         print("2回目")
@@ -55,6 +58,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_2+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_2")
         
         print("3回目")
@@ -63,6 +68,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_3+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_3")
 
         print("4回目")
@@ -71,6 +78,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_4+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_4")
 
         print("5回目")
@@ -79,6 +88,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_5+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_5")
 
         print("6回目")
@@ -87,6 +98,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_6+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_6")
 
         print("7回目")
@@ -95,6 +108,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_7+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_7")
 
         print("8回目")
@@ -103,6 +118,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_8+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_8")
 
         print("9回目")
@@ -111,6 +128,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_9+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_9")
 
         print("10回目")
@@ -119,6 +138,8 @@ for i in range(6):
         alpha=alpha*0.8
         print(cv2.PSNR(OrijinalImage,median_image))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_10+times"+".png",median_image)
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="ASWM_10")
         
 

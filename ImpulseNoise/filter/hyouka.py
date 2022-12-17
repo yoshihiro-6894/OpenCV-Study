@@ -36,3 +36,15 @@ def hyou(trueNoise, testNoise):
     print("F値:"+str(F))
 
     return str(format(F, '.3f'))
+
+
+def Update_imgBinary(baseBinary, addBinary):
+    updateBinary = baseBinary.copy()
+    for i in range(baseBinary.shape[0]):
+        for j in range(baseBinary.shape[1]):
+            if baseBinary[i,j]>0 or addBinary[i,j]>0:
+                updateBinary[i,j] = 1
+            else:
+                updateBinary[i,j] = 0
+
+    return updateBinary
