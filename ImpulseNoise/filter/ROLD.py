@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+import padding
+import GlobalValue as g
+import edgeDetection
 
 def ROLD(image, size=(5, 5),boundary='reflect'):
   pad_image = np.pad(image, ((int(size[0] / 2),), (int(size[1] / 2),)), boundary)
@@ -33,3 +36,38 @@ inputArray = np.arange(1,37).reshape(6,6)
 print(inputArray)
 out = ROLD(inputArray)
 '''
+
+def ROLD_filter(image,size=(5,5),boundary="reflect",Threshold=30):
+    img_cp = image.copy()
+    img_binary = np.zeros(image.shape,dtype=np.uint8)
+    pad_image = padding.pad_stride(image,kernel=np.zeros(size),boundary=boundary)
+    _RoldValue = ROLD(image,size=size,boundary=boundary)
+
+    for x in range(image.shape[0]):
+        for y in range(image.shape[1]):
+            if _RoldValue[x,y] > Threshold:
+                img_binary[x,y] = 1
+                img_cp[x,y] = np.median(pad_image[x,y])
+
+    
+    g.img_binary = img_binary.copy()
+
+    return img_cp
+
+def ROLD_edge_filter(image,size=(5,5),boundary="reflect",Threshold=30):
+    img_cp = image.copy()
+    img_binary = np.zeros(image.shape,dtype=np.uint8)
+    pad_image = padding.pad_stride(image,kernel=np.zeros(size),boundary=boundary)
+    _RoldValue = ROLD(image,size=size,boundary=boundary)
+
+    for x in range(image.shape[0]):
+        for y in range(image.shape[1]):
+            if _RoldValue[x,y] > Threshold:
+                img_binary[x,y] = edgeDetection.detect(pad_image[x,y],size[0])
+                if img_binary[x,y]>0:
+                    img_cp[x,y] = np.median(pad_image[x,y])
+
+    
+    g.img_binary = img_binary.copy()
+
+    return img_cp

@@ -26,9 +26,9 @@ str_imgs = glob.glob('*n')
 
 g.count=0
 print(str_imgs)
-str_imgs = ("02n","03n","08n","010n","012n")
-resultText = open("F_valueResult.txt","w")
-PSNRText = open("PSNR_Edge_Result.txt","w")
+#str_imgs = ("02n","03n","08n","010n","012n")
+resultText = open("custom1_F_valueResult.txt","w")
+PSNRText = open("custom1_PSNR_Edge_Result.txt","w")
 for i in range(6):
     NoiseRatio = (i+1)*10
     print("Noise:"+str(NoiseRatio)+"%")
@@ -49,20 +49,23 @@ for i in range(6):
         median_image = custom_random1.median_filter(inputImage)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="custom_random1")
         median_image = median_image.astype(np.uint8)
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("custom1_median_output"+str(NoiseRatio)+".png",median_image)
         '''
-
+        
+        '''
         #2つのしきい値
         median_image = custom_random_rowcol.median_filter(inputImage.copy(),size=5)
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="rowcol")
         median_image=median_image.astype(np.uint8)
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("custom_random_rowcol"+str(NoiseRatio)+".png",median_image)
         
         median_image = custom_random_rowcol.try_filter(inputImage.copy(),size=5)
         median_image=median_image.astype(np.uint8)
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("custom_random_rowcol_tryimage"+str(NoiseRatio)+".png",median_image)
+        '''
 
         '''
         g.img_binary = get_LCI.detectNoise(inputImage)
@@ -70,16 +73,16 @@ for i in range(6):
         hyouka.hyou(g.TruenoiseBinary,g.img_binary)
         '''
 
-        '''提案手法
+        #提案手法
         median_image = custom_try.filter(inputImage)
         cv2.imwrite("custom_tryLCIrowcol"+str(NoiseRatio)+".png",median_image)
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="rowcol_edge")
         #hyouka.hyou(g.TruenoiseBinary,g.img_binary)
 
-        resultText.write(g.F_old+"&"+g.F_new+" & ")
-        PSNRText.write(str(format(cv2.PSNR(OrijinalImage,median_image),'.2f'))+" & ")
-        '''
+        #resultText.write(g.F_old+"&"+g.F_new+" & ")
+        #PSNRText.write(str(format(cv2.PSNR(OrijinalImage,median_image),'.2f'))+" & ")
+        
 
         #cv2.imwrite("DetectNoiseOLD"+str(NoiseRatio)+".png",g.binary)
         #cv2.imwrite("DetectNoiseNEW"+str(NoiseRatio)+".png",g.binary_new)
