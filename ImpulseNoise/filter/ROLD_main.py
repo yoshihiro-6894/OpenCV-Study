@@ -86,7 +86,7 @@ for i in range(6):
         cv2.imwrite("ROLD"+str(NoiseRatio)+"_1+times"+".png",median_image)
         plot_fig(median_image)
 
-        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=26)
+        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=27)
         print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -94,7 +94,7 @@ for i in range(6):
         cv2.imwrite("ROLD"+str(NoiseRatio)+"_2+times"+".png",median_image)
         plot_fig(median_image,times=2)
 
-        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=24)
+        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=26)
         print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -102,7 +102,7 @@ for i in range(6):
         cv2.imwrite("ROLD"+str(NoiseRatio)+"_3+times"+".png",median_image)
         plot_fig(median_image,times=3)
         
-        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=22)
+        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=24)
         print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -110,13 +110,21 @@ for i in range(6):
         cv2.imwrite("ROLD"+str(NoiseRatio)+"_4+times"+".png",median_image)
         plot_fig(median_image,times=4)
 
-        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=20)
+        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=22)
         print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
         cv2.imwrite("ROLD_FPFN"+str(NoiseRatio)+"_5+times"+".png",visual_hyouka.visual_sabun_fpfn(g.baseBinary))
         cv2.imwrite("ROLD"+str(NoiseRatio)+"_5+times"+".png",median_image)
         plot_fig(median_image,times=5)
+
+        median_image = ROLD.ROLD_edge_filter(median_image,Threshold=20)
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
+        g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
+        hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
+        cv2.imwrite("ROLD_FPFN"+str(NoiseRatio)+"_6+times"+".png",visual_hyouka.visual_sabun_fpfn(g.baseBinary))
+        cv2.imwrite("ROLD"+str(NoiseRatio)+"_6+times"+".png",median_image)
+        plot_fig(median_image,times=6)
 
 
 

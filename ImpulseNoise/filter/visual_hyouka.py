@@ -26,3 +26,26 @@ def visual_fn_fp(trueNoise, testNoise, strNoiseRatio="10", methodName="name"):
 
     cv2.imwrite("FN"+strNoiseRatio+methodName+".png", fn_img)
     cv2.imwrite("FP"+strNoiseRatio+methodName+".png", fp_img)
+
+def sabun(input_old,input_new):
+    return input_old - input_new
+
+def visual(binary):
+    binary_cp=binary.copy()
+    for i in range(binary.shape[0]):
+        for j in range(binary.shape[1]):
+            if binary[i,j] > 0:
+                binary_cp[i,j]=255
+    
+    return binary_cp
+
+def visual_sabun_fpfn(testNoise):
+    tmp = 128 * np.ones(g.TruenoiseBinary.shape)
+    for x in range(g.TruenoiseBinary.shape[0]):
+        for y in range(g.TruenoiseBinary.shape[1]):
+            if testNoise[x,y] > 0 and g.TruenoiseBinary[x,y] == 0:
+                tmp[x,y] = 255
+            if testNoise[x,y] == 0 and g.TruenoiseBinary[x,y] > 0:
+                tmp[x,y] = 0
+
+    return tmp

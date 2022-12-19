@@ -63,7 +63,7 @@ def ROLD_edge_filter(image,size=(5,5),boundary="reflect",Threshold=30):
     for x in range(image.shape[0]):
         for y in range(image.shape[1]):
             if _RoldValue[x,y] > Threshold:
-                img_binary[x,y] = edgeDetection.detect(pad_image[x,y],size[0],Threshold=15)
+                img_binary[x,y] = edgeDetection.detect(pad_image[x,y],size[0],Threshold=16)
                 if img_binary[x,y]>0:
                     img_cp[x,y] = np.median(pad_image[x,y])
 
