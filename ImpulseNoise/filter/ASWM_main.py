@@ -46,7 +46,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(inputImage,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_1+times"+".png",median_image)
         g.baseBinary = g.img_binary.copy()
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -56,7 +56,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_2+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -66,7 +66,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_3+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -76,7 +76,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_4+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -86,7 +86,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_5+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -96,7 +96,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_6+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -106,7 +106,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_7+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -116,7 +116,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_8+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -126,7 +126,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_9+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)
@@ -136,7 +136,7 @@ for i in range(6):
         median_image = ASWM.ASWMfilter(median_image,alpha=alpha)
         median_image = median_image.astype(np.uint8)
         alpha=alpha*0.8
-        print(cv2.PSNR(OrijinalImage,median_image))
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         cv2.imwrite("ASWM"+str(NoiseRatio)+"_10+times"+".png",median_image)
         g.baseBinary = hyouka.Update_imgBinary(baseBinary=g.baseBinary, addBinary=g.img_binary)
         hyouka.hyou(g.TruenoiseBinary,g.baseBinary)

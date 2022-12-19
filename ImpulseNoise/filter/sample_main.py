@@ -15,6 +15,7 @@ import custom_random1
 import custom_random_rowcol
 import custom_try
 import edgeDetection
+import custom_bila
 
 firsttext = "01"
 dirtext = "./randomNoise/Set12/"
@@ -73,13 +74,20 @@ for i in range(6):
         hyouka.hyou(g.TruenoiseBinary,g.img_binary)
         '''
 
+        median_image = custom_bila.custom_bilate_median_filter(inputImage)
+        hyouka.hyou(g.TruenoiseBinary,g.img_binary)
+        median_image = median_image.astype(np.uint8)
+        print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
+        cv2.imwrite("custom_bila_output"+str(NoiseRatio)+".png",median_image)
+
+        '''
         #提案手法
         median_image = custom_try.filter(inputImage)
         cv2.imwrite("custom_tryLCIrowcol"+str(NoiseRatio)+".png",median_image)
         print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
         visual_hyouka.visual_fn_fp(g.TruenoiseBinary,g.img_binary,strNoiseRatio=str(NoiseRatio),methodName="rowcol_edge")
         #hyouka.hyou(g.TruenoiseBinary,g.img_binary)
-
+        '''
         #resultText.write(g.F_old+"&"+g.F_new+" & ")
         #PSNRText.write(str(format(cv2.PSNR(OrijinalImage,median_image),'.2f'))+" & ")
         

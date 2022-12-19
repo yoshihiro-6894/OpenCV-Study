@@ -31,7 +31,7 @@ def W(image):
   w_max = sort_R[t]
   forcus = image[math.floor(len(image)/2)]
   if (forcus<w_min) or (w_max<forcus):
-    g.count= g.count+1
+    #g.count= g.count+1
     return 1
     return np.median(sort_R)
   else:
@@ -62,7 +62,7 @@ def W_median(image,kernel):
 def median_filter(image, boundary='reflect'):
     img_binary=np.zeros(image.shape,dtype=np.uint8)
     img_cp = image.copy()
-    print("custom_random1")
+    #print("custom_random1")
 
     kernel_3=np.array([[1,2,1],[2,0,2],[1,2,1]])
     kernel_3_1=kernel_3.reshape(9,)
@@ -76,7 +76,7 @@ def median_filter(image, boundary='reflect'):
     strided_image_7 = pad_stride(image,kernel_7,boundary)
     strided_image_11 = pad_stride(image,kernel_11,boundary)
 
-    print(strided_image_11.shape)
+    #print(strided_image_11.shape)
 
     print("ノイズ検出")
     t = time.time()

@@ -33,18 +33,18 @@ def hyou(trueNoise, testNoise):
     print("適合率:"+str(Precision)+"再現率:"+str(recall))
 
     F=(2*Precision*recall)/(Precision+recall)
-    print("F値:"+str(F))
+    print("F値:"+str(format(F, '.3f')))
 
     return str(format(F, '.3f'))
 
 
 def Update_imgBinary(baseBinary, addBinary):
-    updateBinary = baseBinary.copy()
+    _updateBinary = baseBinary.copy()
     for i in range(baseBinary.shape[0]):
         for j in range(baseBinary.shape[1]):
             if baseBinary[i,j]>0 or addBinary[i,j]>0:
-                updateBinary[i,j] = 1
+                _updateBinary[i,j] = 1
             else:
-                updateBinary[i,j] = 0
+                _updateBinary[i,j] = 0
 
-    return updateBinary
+    return _updateBinary

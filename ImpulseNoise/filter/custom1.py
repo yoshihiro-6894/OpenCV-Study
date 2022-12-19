@@ -63,7 +63,7 @@ def W_median(image,kernel):
 def median_filter(image ,boundary='reflect'):
     img_binary=np.zeros(image.shape,dtype=np.uint8)
     img_cp = image.copy()
-    print("custom1")
+    #print("custom1")
 
     kernel_3=np.array([[1,2,1],[2,0,2],[1,2,1]])
     kernel_3_1=kernel_3.reshape(9,)
@@ -97,7 +97,7 @@ def median_filter(image ,boundary='reflect'):
     strided_image_11 = np.lib.stride_tricks.as_strided(pad_image, shape, strides).reshape(shape[0], shape[1], kernel_11.shape[0] * kernel_11.shape[1])
     '''
 
-    print(strided_image_11.shape)
+    #print(strided_image_11.shape)
 
     print("ノイズ検出")
     t=time.time()

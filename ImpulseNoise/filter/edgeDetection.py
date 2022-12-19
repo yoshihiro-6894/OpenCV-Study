@@ -51,8 +51,7 @@ def detect_reshape(inputImage,windowSize):
 
     return 1
 
-def detect(inputImage,windowSize):
-    Threshold=5
+def detect(inputImage,windowSize,Threshold=5):
     Direct_coordinates = np.empty([4,0])
     Direct_coordinates_list = Direct_coordinates.tolist()
     for i in range(windowSize):
