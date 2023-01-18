@@ -17,6 +17,7 @@ filterSize = 5
 
 os.chdir(dirtext)
 str_imgs = glob.glob('*n')
+str_imgs = ("01n","02n","03n","04n","05n","06n","07n","08n","09n","010n","011n","012n")
 
 PSNRText = open("DWM_PSNR_Result.txt","w")
 F_valueText = open("DWM_F_Result.txt","w")
@@ -77,7 +78,7 @@ for tex in range(len(str_imgs)):
         median_image = inputImage.copy()
         for k in range(10):
             print(str(k+1)+"回目")
-            median_image = DWMfilter.DWM(median_image,size = 3,Threshold=Threshold)
+            median_image = DWMfilter.DWM(median_image,size = 5,Threshold=Threshold)
             print("PSNR : "+format(cv2.PSNR(OrijinalImage,median_image),'.2f'))
             Threshold = Threshold * 0.8
             cv2.imwrite("DWM"+str(NoiseRatio)+str(k)+"times.png",median_image)

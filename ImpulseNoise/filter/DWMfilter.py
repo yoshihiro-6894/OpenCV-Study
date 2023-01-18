@@ -78,16 +78,16 @@ def detect(input,size,Threshold=510):
     print(np.argmin(np.sum((np.abs(Direct_coordinates-centers)),axis=1)))
 
 
-asize=5
+# asize=5
 
-b = np.zeros((asize,asize))
+# b = np.zeros((asize,asize))
 
-for i in range(asize):
-    for j in range(asize):
-        b[i,j] = i*asize + j
+# for i in range(asize):
+#     for j in range(asize):
+#         b[i,j] = i*asize + j
 
-c = padding.pad_stride_reshape(b,np.zeros((asize,asize)))
-detect(c[1,2],asize)
+# c = padding.pad_stride_reshape(b,np.zeros((asize,asize)))
+# detect(c[1,2],asize)
 
 
     
